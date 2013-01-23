@@ -14,10 +14,11 @@ print tests
 point = Literal(".")
 #num = Optional(point + Word(nums))
 
-# +6.7 or -89.678 or 5 or 892892
-num = Combine(Word("+-" + nums, nums) + Optional(point + Optional(Word(nums))))
-
-delimiter = oneOf(". : ; |")
+# Only whole number strings
+num = Word(nums)
+# Float number - +6.7 or -89.678 or 5 or 892892
+fnum = Combine(Word("+-" + nums, nums) +
+               Optional(point + Optional(Word(nums))))
 
 start_trash = Suppress(Literal("m[mi++]="))
 quote = Suppress(Literal("\""))
@@ -27,7 +28,7 @@ delimiter = Suppress(Literal("|"))
 inv1 = num + ';' + num + ';' + num + ';' + num + ';' + num
 inv2 = num + ';' + num + ';' + num + ';' + num + ';' + num
 # Plan for possible negative temperatures
-env = num + ';' + num + ';' + Optional('-') + num + ';' + num + ';' + num
+env = num + ';' + num + ';' + fnum + ';' + fnum + ';' + num
 
 interval = start_trash + quote + date + time + delimiter + inv1 + delimiter + \
     inv2 + delimiter + env + quote
