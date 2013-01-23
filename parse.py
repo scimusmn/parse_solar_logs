@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from pyparsing import *
+from pyparsing import Combine, Literal, Optional, Suppress, Word, nums
 
 
 def main():
