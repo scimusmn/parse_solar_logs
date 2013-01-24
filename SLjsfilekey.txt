@@ -1,0 +1,23 @@
+m[mi++]="AA.AA.AA BB:BB:BB|CCCC;DDDD;EEEEE;FF;GG|HHHH;IIII;JJJJJ;KK;LL|MMM;NN;OO;(PP);(QQ)"
+
+A: Date (DD.MM.YY)
+B: Time (Military, HH:MM:SS)
+
+C: Inv1 AC Power (Watts)
+D: Inv1 DC Power (Watts)
+E: Inv1 Daily production (Watt-hours)
+F: Inv1 DC Voltage (Volts)
+G: Inv1 Temp (degrees Celsius)
+
+H: Inv2 AC Power (Watts)
+I: Inv2 DC Power (Watts)
+J: Inv2 Daily production (Watt-hours)
+K: Inv2 DC Voltage (Volts)
+L: Inv2 Temp (degrees Celsius)
+
+M: Irradiance (Watts per meter squared (W/m^2))
+N: Module Temp (degrees Celsius)
+O: Ambient Temp (degrees Celsius)
+
+P: Value for wind: Can be ignored
+Q: Value for day's irradiance: Can be ignored
