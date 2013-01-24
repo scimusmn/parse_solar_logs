@@ -26,7 +26,8 @@ def main():
 
     start_trash = Suppress(Literal("m[mi++]="))
     quote = Suppress(Literal("\""))
-    date = num + '.' + num + '.' + num
+    dot = Suppress(Literal("."))
+    date = num + dot + num + dot + num
     time = num + ':' + num + ':' + num
     delimiter = Suppress(Literal("|"))
     inv1 = num + ';' + num + ';' + num + ';' + num + ';' + num
