@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 from pyparsing import Combine, Literal, Optional, Suppress, Word, nums
+from pyparsing import *
 import argparse
+import datetime
 
 
 def main():
@@ -15,9 +17,11 @@ def main():
         logs = f.readlines()
 
     # Debug
-    print logs
+    #print logs
 
     # Only whole number strings
+    #num = Word(nums).setParseAction(lambda t:int(t[0]))
+    #num = Word(nums).setParseAction( lambda s,l,t: [ int(t[0]) ] )
     num = Word(nums)
     # Float number - +6.7 or -89.678 or 5 or 892892
     point = Literal(".")
@@ -27,20 +31,35 @@ def main():
     start_trash = Suppress(Literal("m[mi++]="))
     quote = Suppress(Literal("\""))
     dot = Suppress(Literal("."))
-    date = num + dot + num + dot + num
-    time = num + ':' + num + ':' + num
+    colon = Suppress(Literal(":"))
+    #date = num + dot + num + dot + num
+    day = num
+    month = num
+    year = num
+    hour = num
+    min = num
+    sec = num
+    #timestamp = datetime.datetime(year, month, day, hour, min, sec)
+
+    date = day.setResultsName("day") + dot + month + dot + year.setResultsName("year")
+    time = hour + colon + min + colon + sec
     delimiter = Suppress(Literal("|"))
     inv1 = num + ';' + num + ';' + num + ';' + num + ';' + num
     inv2 = num + ';' + num + ';' + num + ';' + num + ';' + num
     # Plan for possible negative temperatures
     env = num + ';' + num + ';' + fnum + ';' + fnum + ';' + num
 
-    interval = (start_trash + quote + date + time + delimiter + inv1 +
+    interval = (start_trash + quote +  date + time + delimiter + inv1 +
                 delimiter + inv2 + delimiter + env + quote)
 
     for log in logs:
         stats = interval.parseString(log)
-        print stats.asList()
+        #timestamp = datetime.datetime(int(year))
+        print "Year: " + stats.year
+        print "Timestamp: " + datetime.datetime(int(stats.year), \
+                                                int(stats.month), \
+                                                int()
+        #print stats.asList()
 
 
 if __name__ == "__main__":
